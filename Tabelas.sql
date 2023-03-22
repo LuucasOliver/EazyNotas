@@ -44,7 +44,7 @@ Create table TIPO (
 )
 
 -- Inserir Tipo
-insert into TIPO (idTipo,nomeTipo) VALUES (1,'Kaue')
+insert into TIPO (idTipo,nomeTipo) VALUES (1,'Matheus')
 
 SELECT * FROM (
 SELECT U.idUsuario,A.nome,T.nomeTipo, U.ra, U.bitAtivo FROM USUARIO U
