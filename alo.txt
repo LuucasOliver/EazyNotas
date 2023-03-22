@@ -1,0 +1,3 @@
+consumir as tabelas do banco (printar as informações do banco no python)
+utilzar o Django para criar um hello world em html
+Mostrar essas informações do banco no django
