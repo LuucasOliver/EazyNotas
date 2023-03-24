@@ -46,9 +46,9 @@ BEGIN
 
 END
 
-EXEC dbo.inserirProfessor '654654', 'Professor Zé'
+EXEC dbo.inserirProfessor '654654', 'Viturino'
 
-EXEC dbo.inserirAluno '55555', 'Donetes', 1
+EXEC dbo.inserirAluno '55555', 'Luquinhas', 1
 
 
 SELECT * FROM PROFESSOR
