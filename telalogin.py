@@ -3,7 +3,7 @@ from PyQt5 import uic,QtWidgets
 def funcao_principal():
     linha1 = telalogin.lineEdit.text()
     linha2 = telalogin.lineEdit_3.text()
-    print("id usuário:",linha1) 
+    print("rA ou IdProfessor:",linha1) 
     print("Senha:",linha2)
 
     if telalogin.radioButton.isChecked() :
