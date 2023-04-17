@@ -13,28 +13,10 @@ app = Flask(__name__)
 def index():
     return "EazyNotas"
 
-@app.route('/usuarios')
-def getAll():
-    user = usuario.getAll()
-    return user
-
-@app.route('/usuario/<idUsuario>')
-def getUser(idUsuario):
-    user = usuario.getUser(idUsuario)
-    return user
-
-@app.route('/usuario',methods = ['POST'])
-def createUser():
-    data = request.json
-    ra = data['ra']
-    user = usuario.createUser(ra)
-    print(ra)
-    return 'sucesso'
-
 @app.route('/aluno',methods = ['POST'])
 def createAluno():
     data = request.json
-    idUsuario = data['idUsuario']
+    idUsuario = data['rA']
     nome = data['nome']
     idTipo = data['idTipo']
     idTurma = data['idTurma']
@@ -47,18 +29,17 @@ def getAllAlunos():
     als = aluno.getAllAlunos()
     return als
 
-@app.route('/aluno/<idAlunos>')
-def getAluno(idAlunos):
-    alu = aluno.getAluno(idAlunos)
+@app.route('/aluno/<rA>')
+def getAluno(rA):
+    alu = aluno.getAluno(rA)
     return alu
 
 @app.route('/professor',methods = ['POST'])
 def createProf():
     data = request.json
-    idUsuario = data['idUsuario']
     nome = data['nome']
     idTipo = data['idTipo']
-    user = professor.createProf(idUsuario, nome, idTipo)
+    user = professor.createProf(nome, idTipo)
     print()
     return 'sucesso'
 
@@ -113,10 +94,10 @@ def getTurma(idTurma):
 @app.route('/notas',methods = ['POST'])
 def createNota():
     data = request.json
-    idAluno = data['idAluno']
+    idAluno = data['rA']
     idMateria = data['idMateria']
     valorNota = data['valorNota']
-    user = notas.createNota(idAluno, idMateria, valorNota)
+    user = notas.createNota(rA, idMateria, valorNota)
     print()
     return 'sucesso'
 
@@ -125,18 +106,18 @@ def getAllNota():
     nots = notas.getAllNota()
     return nots
 
-@app.route('/notas/<idAluno>')
-def getNota(idAluno):
-    v_nota = notas.getNota(idAluno)
+@app.route('/notas/<rA>')
+def getNota(rA):
+    v_nota = notas.getNota(rA)
     return v_nota
 
 @app.route('/frequencia',methods = ['POST'])
 def createFrequencia():
     data = request.json
-    idAluno = data['idAluno']
+    idAluno = data['rA']
     idMateria = data['idMateria']
     NumFreq = data['NumFreq']
-    user = frequencia.createFrequencia(idAluno, idMateria, NumFreq)
+    user = frequencia.createFrequencia(rA, idMateria, NumFreq)
     print()
     return 'sucesso'
 
@@ -146,8 +127,8 @@ def getAllFrequencia():
     return frequ
 
 @app.route('/frequencia/<idAluno>')
-def getFrequencia(idAluno):
-    t_freq = frequencia.getFrequencia(idAluno)
+def getFrequencia(rA):
+    t_freq = frequencia.getFrequencia(rA)
     return t_freq
 
 if __name__ == '__main__':
