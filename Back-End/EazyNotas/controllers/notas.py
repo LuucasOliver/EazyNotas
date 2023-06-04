@@ -3,11 +3,11 @@ import sys
 sys.path.insert(0, './')
 import sql
 
-def createNota(idAluno, idMateria, valorNota):
+def createNota(rA, idMateria, notaP1, notaP2, notaRc):
     cursor = sql.conectabanco()
-    sqlQuery = 'INSERT INTO NOTA (idAluno, idMateria, valorNota) VALUES(?, ?, ?)'
-    params = idAluno, idMateria, valorNota
-    print(idAluno, idMateria, valorNota)
+    sqlQuery = 'INSERT INTO NOTA (rA, idMateria, notaP1, notaP2, notaRc) VALUES(?, ?, ?)'
+    params = rA, idMateria, notaP1, notaP2, notaRc
+    print(rA, idMateria, notaP1, notaP2, notaRc)
     cursor.execute(sqlQuery, params)
     cursor.commit()
     cursor.close()
@@ -16,17 +16,17 @@ def createNota(idAluno, idMateria, valorNota):
 def getAllNota():
 
     cursor = sql.conectabanco()
-    cursor.execute("SELECT idAluno, idMateria, valorNota FROM NOTA")
+    cursor.execute("SELECT rA, idMateria, notaP1, notaP2, notaRc FROM NOTA")
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
     json_string = json.dumps(result)
     return json_string
 
-def getNota(idAluno):
+def getNota(rA):
 
     cursor = sql.conectabanco()
-    sqlQuery = "SELECT idAluno, idMateria, valorNota FROM NOTA WHERE idAluno = ?"
-    cursor.execute(sqlQuery, idAluno)
+    sqlQuery = "SELECT rA, idMateria, notaP1, notaP2, notaRc FROM NOTA WHERE idAluno = ?"
+    cursor.execute(sqlQuery, rA)
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
     json_string = json.dumps(result)

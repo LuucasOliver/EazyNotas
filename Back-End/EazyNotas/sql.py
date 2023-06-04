@@ -1,6 +1,6 @@
 import pyodbc
 def conectabanco():
-    server = 'FERNANDO-PC'
+    server = 'DESKTOP-H85UEID'
     database = 'master'
     username = ''
     password = ''
@@ -10,7 +10,3 @@ def conectabanco():
     cursor = conn.cursor()
 
     return cursor
-
-    
-
-

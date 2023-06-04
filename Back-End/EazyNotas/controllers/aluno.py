@@ -3,11 +3,11 @@ import sys
 sys.path.insert(0, './')
 import sql
 
-def createAluno(idUsuario, nome, idTipo, idTurma):
+def createAluno(rA, nome, idTipo, idTurma, senhaAluno):
     cursor = sql.conectabanco()
-    sqlQuery = 'INSERT INTO ALUNO (idUsuario, nome, idTipo, idTurma) VALUES(?, ?, ?, ?)'
-    params = idUsuario, nome, idTipo, idTurma 
-    print(idUsuario, nome, idTipo, idTurma)
+    sqlQuery = 'INSERT INTO ALUNO ( nome, idTipo, idTurma, senhaAluno) VALUES(?, ?, ?, ?)'
+    params = rA, nome, idTipo, idTurma, senhaAluno 
+    print(rA, nome, idTipo, idTurma, senhaAluno)
     cursor.execute(sqlQuery, params)
     cursor.commit()
     cursor.close()
@@ -16,16 +16,16 @@ def createAluno(idUsuario, nome, idTipo, idTurma):
 def getAllAlunos():
 
     cursor = sql.conectabanco()
-    cursor.execute("SELECT idAluno, idUsuario, nome, idTipo, idTurma, CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1")
+    cursor.execute("SELECT rA, nome, idTipo, idTurma, senhaAluno CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1")
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
     json_string = json.dumps(result)
     return json_string
 
-def getAluno(idAluno):
+def getAluno(rA):
 
     cursor = sql.conectabanco()
-    sqlQuery = "SELECT idAluno, idUsuario, nome, idTipo, idTurma, CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1 AND idAluno = ?"
+    sqlQuery = "SELECT rA, nome, idTipo, idTurma, senhaAluno CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1 AND idAluno = ?"
     cursor.execute(sqlQuery, idAluno)
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
