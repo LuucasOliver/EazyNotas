@@ -1,6 +1,5 @@
 import json
 from flask import Flask, request
-from controllers import usuario
 from controllers import aluno
 from controllers import professor
 from controllers import materias
@@ -16,11 +15,12 @@ def index():
 @app.route('/aluno',methods = ['POST'])
 def createAluno():
     data = request.json
-    idUsuario = data['rA']
+    rA = data['rA']
     nome = data['nome']
     idTipo = data['idTipo']
     idTurma = data['idTurma']
-    user = aluno.createAluno(idUsuario, nome, idTipo, idTurma)
+    senhaAluno = data['senhaAluno']
+    user = aluno.createAluno(rA, nome, idTipo, idTurma, senhaAluno)
     print()
     return 'sucesso'
 
@@ -39,7 +39,8 @@ def createProf():
     data = request.json
     nome = data['nome']
     idTipo = data['idTipo']
-    user = professor.createProf(nome, idTipo)
+    senhaProfessor = data['senhaProfessor']
+    user = professor.createProf(nome, idTipo, senhaProfessor)
     print()
     return 'sucesso'
 
@@ -58,7 +59,9 @@ def createMaterias():
     data = request.json
     nomeMat = data['nomeMat']
     idProfessor = data['idProfessor']
-    user = materias.createMaterias(nomeMat, idProfessor)
+    diaMateria = data['diaMateria']
+    horarioAula = data['horarioAula']
+    user = materias.createMaterias(nomeMat, idProfessor, diaMateria, horarioAula)
     print()
     return 'sucesso'
 
@@ -94,10 +97,12 @@ def getTurma(idTurma):
 @app.route('/notas',methods = ['POST'])
 def createNota():
     data = request.json
-    idAluno = data['rA']
+    rA = data['rA']
     idMateria = data['idMateria']
-    valorNota = data['valorNota']
-    user = notas.createNota(rA, idMateria, valorNota)
+    notaP1 = data['notaP1']
+    notaP2 = data['notaP2']
+    notaRC = data['notaRC']
+    user = notas.createNota(rA, idMateria, notaP1, notaP2, notaRC)
     print()
     return 'sucesso'
 
@@ -114,9 +119,11 @@ def getNota(rA):
 @app.route('/frequencia',methods = ['POST'])
 def createFrequencia():
     data = request.json
-    idAluno = data['rA']
+    rA = data['rA']
     idMateria = data['idMateria']
-    NumFreq = data['NumFreq']
+    pAluno = data['pAluno']
+    fAluno = data['fAluno']
+    freqAluno = data['freqAluno']
     user = frequencia.createFrequencia(rA, idMateria, NumFreq)
     print()
     return 'sucesso'
@@ -126,7 +133,7 @@ def getAllFrequencia():
     frequ = frequencia.getAllFrequencia()
     return frequ
 
-@app.route('/frequencia/<idAluno>')
+@app.route('/frequencia/<rA>')
 def getFrequencia(rA):
     t_freq = frequencia.getFrequencia(rA)
     return t_freq
