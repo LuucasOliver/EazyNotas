@@ -15,12 +15,12 @@ def index():
 @app.route('/aluno',methods = ['POST'])
 def createAluno():
     data = request.json
-    idUsuario = data['rA']
+    rA = data['rA']
     nome = data['nome']
     idTipo = data['idTipo']
     idTurma = data['idTurma']
     senhaAluno = data['senhaAluno']
-    user = aluno.createAluno(idUsuario, nome, idTipo, idTurma, senhaAluno)
+    user = aluno.createAluno(rA, nome, idTipo, idTurma, senhaAluno)
     print()
     return 'sucesso'
 
@@ -97,7 +97,7 @@ def getTurma(idTurma):
 @app.route('/notas',methods = ['POST'])
 def createNota():
     data = request.json
-    idAluno = data['rA']
+    rA = data['rA']
     idMateria = data['idMateria']
     notaP1 = data['notaP1']
     notaP2 = data['notaP2']
@@ -119,7 +119,7 @@ def getNota(rA):
 @app.route('/frequencia',methods = ['POST'])
 def createFrequencia():
     data = request.json
-    idAluno = data['rA']
+    rA = data['rA']
     idMateria = data['idMateria']
     pAluno = data['pAluno']
     fAluno = data['fAluno']
@@ -133,7 +133,7 @@ def getAllFrequencia():
     frequ = frequencia.getAllFrequencia()
     return frequ
 
-@app.route('/frequencia/<idAluno>')
+@app.route('/frequencia/<rA>')
 def getFrequencia(rA):
     t_freq = frequencia.getFrequencia(rA)
     return t_freq

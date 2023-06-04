@@ -25,7 +25,7 @@ def getAllNota():
 def getNota(rA):
 
     cursor = sql.conectabanco()
-    sqlQuery = "SELECT rA, idMateria, notaP1, notaP2, notaRc FROM NOTA WHERE idAluno = ?"
+    sqlQuery = "SELECT rA, idMateria, notaP1, notaP2, notaRc FROM NOTA WHERE rA = ?"
     cursor.execute(sqlQuery, rA)
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
