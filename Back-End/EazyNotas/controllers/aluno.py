@@ -3,11 +3,11 @@ import sys
 sys.path.insert(0, './')
 import sql
 
-def createAluno(rA, nome, idTipo, idTurma, senhaAluno):
+def createAluno(nome, idTurma, senhaAluno):
     cursor = sql.conectabanco()
-    sqlQuery = 'INSERT INTO ALUNO (nome, idTipo, idTurma, senhaAluno) VALUES(?, ?, ?, ?)'
-    params = rA, nome, idTipo, idTurma, senhaAluno 
-    print(rA, nome, idTipo, idTurma, senhaAluno)
+    sqlQuery = 'INSERT INTO ALUNO (nome, idTurma, senhaAluno) VALUES(?, ?, ?)'
+    params = nome, idTurma, senhaAluno 
+    print(nome, idTurma, senhaAluno)
     cursor.execute(sqlQuery, params)
     cursor.commit()
     cursor.close()

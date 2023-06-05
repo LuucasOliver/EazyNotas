@@ -1,12 +1,15 @@
 import json
 from flask import Flask, request
+from flask_cors import CORS
 from controllers import aluno
 from controllers import professor
 from controllers import materias
 from controllers import turmas
 from controllers import notas
 from controllers import frequencia
+from controllers import signin
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -15,12 +18,9 @@ def index():
 @app.route('/aluno',methods = ['POST'])
 def createAluno():
     data = request.json
-    rA = data['rA']
     nome = data['nome']
-    idTipo = data['idTipo']
-    idTurma = data['idTurma']
     senhaAluno = data['senhaAluno']
-    user = aluno.createAluno(rA, nome, idTipo, idTurma, senhaAluno)
+    user = aluno.createAluno(nome, senhaAluno)
     print()
     return 'sucesso'
 
@@ -34,15 +34,12 @@ def getAluno(rA):
     alu = aluno.getAluno(rA)
     return alu
 
-@app.route('/professor',methods = ['POST'])
-def createProf():
+@app.route('/login',methods = ['POST'])
+def login():
     data = request.json
-    nome = data['nome']
-    idTipo = data['idTipo']
-    senhaProfessor = data['senhaProfessor']
-    user = professor.createProf(nome, idTipo, senhaProfessor)
-    print()
-    return 'sucesso'
+    nome = data['login']
+    senha = data['senha']
+    return signin.login(nome,senha)
 
 @app.route('/professor')
 def getAllProf():
@@ -139,5 +136,5 @@ def getFrequencia(rA):
     return t_freq
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=3000)
 

@@ -1,6 +1,6 @@
 import pyodbc
 def conectabanco():
-    server = 'DESKTOP-H85UEID'
+    server = 'localhost'
     database = 'master'
     username = ''
     password = ''
