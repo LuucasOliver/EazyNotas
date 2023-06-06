@@ -5,33 +5,31 @@
     </div>
     <div class="menu-itens">
       <div class="menu-itens-content">
-        <div class="item">
+        <div
+          v-if="$store.state.user.role === 'professor'"
+          class="item"
+          @click="$router.push('/turma')"
+        >
           <div class="icon">
             <img src="@images/plateboard.png" alt="">
           </div>
           <div class="label">TURMA</div>
         </div>
-        <div class="item">
+        <div class="item" v-if="$store.state.user.role === 'professor'">
           <div class="icon">
             <img src="@images/turmas.png" alt="">
           </div>
           <div class="label">MATERIAS</div>
         </div>
-        <div class="item">
+        <div class="item" v-if="$store.state.user.role === 'professor'">
           <div class="icon">
             <img src="@images/turmas.png" alt="">
           </div>
           <div class="label">NOTA</div>
         </div>
-        <div class="item">
-          <div class="icon">
-            <img src="@images/turmas.png" alt="">
-          </div>
-          <div class="label">FREQUENCIA</div>
-        </div>
       </div>
       <div class="footer">
-        <div class="item">
+        <div class="item" @click="logOut">
           <div class="icon">
             <img src="@images/logout.png" alt="">
           </div>
@@ -43,8 +41,14 @@
 </template>
 
 <script>
+import { removeLocalStorage } from '@/util/setCookies'
 export default {
-
+  methods: {
+    logOut () {
+      removeLocalStorage()
+      this.$store.state.user.isLogged = false
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -6,7 +6,8 @@ module.exports = defineConfig({
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        '@images': path.resolve(__dirname, 'src/assets/img')
+        '@images': path.resolve(__dirname, 'src/assets/img'),
+        '@api': path.resolve(__dirname, 'src/api')
       },
       extensions: ['', '.js', '.vue']
     }

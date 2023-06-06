@@ -19,7 +19,7 @@
           </select>
         </div>
         <div class="action">
-          <button class="btn primary">Cadastrar</button>
+          <button @click="createUser" class="btn primary">Cadastrar</button>
         </div>
       </div>
     </div>
@@ -27,13 +27,24 @@
 </template>
 
 <script>
+import { createProfessor } from '@api/professor'
 export default {
   name: 'cadastroView',
   data: () => ({
     usuario: '',
     senha: '',
     role: 'professor'
-  })
+  }),
+  methods: {
+    async createUser () {
+      try {
+        if (this.role === 'professor') await createProfessor(this.usuario, this.senha)
+        return true
+      } catch (error) {
+        alert(error)
+      }
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
@@ -46,6 +57,11 @@ export default {
   width: 100%;
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background-color: #6ac8ff;
+  }
 }
 .input {
   display: flex;

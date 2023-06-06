@@ -12,7 +12,7 @@
           <input v-model="senha" type="password" name="usuario" id="senha">
         </div>
         <div class="action">
-          <button class="btn primary">Entrar</button>
+          <button @click="login()" class="btn primary">Entrar</button>
         </div>
       </div>
     </div>
@@ -20,12 +20,28 @@
 </template>
 
 <script>
+import { logIn as verifyCredentials } from '@/api/login'
+import { saveOnLocalStorage } from '@/util/setCookies'
 export default {
   name: 'cadastroView',
   data: () => ({
     usuario: '',
     senha: ''
-  })
+  }),
+  methods: {
+    async login () {
+      const found = await verifyCredentials(this.usuario, this.senha)
+      if (found) {
+        this.$store.state.user.name = this.usuario
+        this.$store.state.user.role = found.role
+        if (found.role === 'professor') this.$store.state.user.idProfessor = found.idProfessor
+        else this.$store.state.user.ra = found.ra
+        this.$store.state.user.isLogged = true
+        saveOnLocalStorage(this.$store.state)
+        this.$router.push('/')
+      }
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
