@@ -15,7 +15,11 @@
           </div>
           <div class="label">TURMA</div>
         </div>
-        <div class="item" v-if="$store.state.user.role === 'professor'">
+        <div
+          class="item"
+          v-if="$store.state.user.role === 'professor'"
+          @click="$router.push('/materia')"
+        >
           <div class="icon">
             <img src="@images/turmas.png" alt="">
           </div>

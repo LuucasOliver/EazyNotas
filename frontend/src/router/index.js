@@ -29,6 +29,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "turmas" */ '../views/TurmasView.vue')
   },
   {
+    path: '/materia',
+    name: 'materias',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "materias" */ '../views/MateriasView.vue')
+  },
+  {
     path: '/turma/:id',
     name: 'turma',
     props: true,
