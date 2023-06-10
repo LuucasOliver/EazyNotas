@@ -13,6 +13,7 @@
         </div>
         <div class="action">
           <button @click="login()" class="btn primary">Entrar</button>
+          <button @click="$router.push('/cadastro')" class="btn primary">Cadastrar</button>
         </div>
       </div>
     </div>
@@ -54,6 +55,10 @@ export default {
   gap: 16px;
   img {
     width: 200px;
+  }
+  .action {
+    display: flex;
+    gap: 14px;
   }
 }
 </style>

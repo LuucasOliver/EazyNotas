@@ -17,7 +17,7 @@ new Vue({
 if (getOnLocalStorage()) {
   console.log(getOnLocalStorage())
   store.replaceState({ ...getOnLocalStorage() })
-} else router.push('/login')
+}
 
 Vue.config.errorHandler = (error) => {
   if (error.name === 'NavigationDuplicated') return true

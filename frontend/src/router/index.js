@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { getOnLocalStorage } from '@/util/setCookies'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "turmas" */ '../views/TurmasView.vue')
+  },
+  {
+    path: '/nota',
+    name: 'notas',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "turmas" */ '../views/NotasView.vue')
   },
   {
     path: '/materia',
@@ -61,4 +70,9 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (['cadastro', 'login'].includes(to.name)) next()
+  else if (!getOnLocalStorage()) router.push('/login')
+  else next()
+})
 export default router

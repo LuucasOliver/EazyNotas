@@ -25,7 +25,10 @@
           </div>
           <div class="label">MATERIAS</div>
         </div>
-        <div class="item" v-if="$store.state.user.role === 'professor'">
+        <div class="item"
+          @click="$router.push('/nota')"
+          v-if="$store.state.user.role === 'professor'"
+        >
           <div class="icon">
             <img src="@images/turmas.png" alt="">
           </div>
@@ -51,6 +54,7 @@ export default {
     logOut () {
       removeLocalStorage()
       this.$store.state.user.isLogged = false
+      this.$router.push('/login')
     }
   }
 }
