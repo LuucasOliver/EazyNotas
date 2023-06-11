@@ -1,18 +1,18 @@
 import api from '@/config/api'
 
 export const createNota = async (
-  ra,
+  rA,
   idMateria,
   notaP1,
-  notap2,
-  notaRc
+  notaP2,
+  notaRC
 ) => {
   const { data } = await api.post('notas', {
-    ra,
+    rA,
     idMateria,
     notaP1,
-    notap2,
-    notaRc
+    notaP2,
+    notaRC
   })
   return data
 }

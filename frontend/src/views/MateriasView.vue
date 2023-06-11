@@ -3,7 +3,7 @@
     <div style="display:flex; justify-content:space-between">
       <div class="title">{{ $store.state.user.name }}</div>
       <div>
-        <button @click="$router.push('/turma/nova')" class="btn primary">Nova Materia</button>
+        <button @click="$router.push('/materia/nova')" class="btn primary">Nova Materia</button>
       </div>
     </div>
     <div class="card">
@@ -17,8 +17,10 @@
         </thead>
         <tbody>
           <tr v-for="(materia, index) in materias" :key="index">
-            <td>{{ materia.sala }}</td>
+            <td>{{ materia.nomeMat }}</td>
             <td>{{ professores.find(professor => professor.idProfessor === materia.idProfessor).nome }}</td>
+            <td>{{ materia.diaMateria }}</td>
+            <td>{{ materia.horarioAula }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-import { getAllTurma } from '@/api/turma'
+import { getAllMaterias } from '@/api/materias'
 import { getAllProfessor } from '@/api/professor'
 export default {
   data: () => ({
@@ -35,12 +37,10 @@ export default {
     professores: []
   }),
   async mounted () {
-    const [turmas, professores] = await Promise.all([
-      getAllTurma(),
+    [this.materias, this.professores] = await Promise.all([
+      getAllMaterias(),
       getAllProfessor()
     ])
-    this.materias = turmas
-    this.professores = professores
   },
   methods: {}
 }

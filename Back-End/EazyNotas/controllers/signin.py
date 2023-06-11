@@ -29,7 +29,7 @@ def login(nome, senha):
         return jsonify(response), 200
 
     # Consulta SQL para aluno
-    query_aluno = "SELECT * FROM aluno WHERE nome = %s AND senhaAluno = %s"
+    query_aluno = "SELECT * FROM aluno WHERE nome = ? AND senhaAluno = ?"
 
     # Executa a consulta para aluno
     cursor.execute(query_aluno, params)

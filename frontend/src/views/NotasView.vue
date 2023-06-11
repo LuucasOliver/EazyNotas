@@ -2,22 +2,27 @@
   <section>
     <div style="display:flex; justify-content:space-between">
       <div class="title">{{ $store.state.user.name }}</div>
+      <div>
+        <button @click="$router.push('/nota/nova')" class="btn primary">Nova nota</button>
+      </div>
     </div>
     <div class="card">
       <div class="card-title">Notas:</div>
       <table>
         <thead>
           <th>Disciplinas</th>
+          <th>Aluno</th>
           <th>p1</th>
           <th>p2</th>
-          <th>Média final</th>
+          <th>Rec</th>
         </thead>
         <tbody>
-          <tr v-for="(disciplina, index) in disciplinas" :key="index">
-            <td>{{ disciplina.nome }}</td>
-            <td>{{ disciplina.p1 }}</td>
-            <td>{{ disciplina.p2 }}</td>
-            <td>{{ disciplina.med }}</td>
+          <tr v-for="(nota, index) in notas" :key="index">
+            <td>{{ nota.nome }}</td>
+            <td>{{ nota.nome }}</td>
+            <td>{{ nota.notaP1 }}</td>
+            <td>{{ nota.notaP2 }}</td>
+            <td>{{ nota.notaRc }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,13 +32,24 @@
 
 <script>
 import { getAllNotas } from '@/api/notas'
+import { getAllMaterias } from '@/api/materias'
+import { getAllAlunos } from '@/api/aluno'
 export default {
   data: () => ({
-    notas: []
+    notas: [],
+    alunos: [],
+    materias: []
   }),
   async mounted () {
-    const notas = await getAllNotas()
-    this.notas = notas
+    [
+      this.notas,
+      this.materias,
+      this.alunos
+    ] = await Promise.all([
+      getAllNotas(),
+      getAllMaterias(),
+      getAllAlunos()
+    ])
   },
   methods: {}
 }

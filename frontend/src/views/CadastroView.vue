@@ -3,6 +3,19 @@
     <div class="content">
       <img src="@/assets/img/fotoCadastro.svg" alt="">
       <div class="form-data">
+        <div class="input input-dropdown" v-if="role ==='aluno'">
+          <label for="role">Turma</label>
+          <select v-model="selectedTurma" name="role" id="role">
+            <option
+              v-for="selectedTurma in turmas"
+              :key="selectedTurma.idTurma"
+              :value="selectedTurma.idTurma"
+            >
+              {{ selectedTurma.sala }}
+            </option>
+            <option value="aluno">Aluno</option>
+          </select>
+        </div>
         <div class="input input-text">
           <label for="usuario">Usuario:</label>
           <input v-model="usuario" type="text" name="usuario" id="usuario">
@@ -28,17 +41,26 @@
 
 <script>
 import { createProfessor } from '@api/professor'
+import { createAluno } from '@api/aluno'
+import { getAllTurma } from '@api/turma'
 export default {
   name: 'cadastroView',
   data: () => ({
     usuario: '',
     senha: '',
-    role: 'professor'
+    role: 'professor',
+    turmas: [],
+    selectedTurma: ''
   }),
+  async mounted () {
+    this.turmas = await getAllTurma()
+  },
   methods: {
     async createUser () {
       try {
         if (this.role === 'professor') await createProfessor(this.usuario, this.senha)
+        else await createAluno(this.usuario, this.selectedTurma, this.senha)
+        this.$router.push('/login')
         return true
       } catch (error) {
         alert(error)

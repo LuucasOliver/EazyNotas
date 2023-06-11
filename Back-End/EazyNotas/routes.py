@@ -20,11 +20,12 @@ def createAluno():
     data = request.json
     nome = data['nome']
     senhaAluno = data['senhaAluno']
-    user = aluno.createAluno(nome, senhaAluno)
+    idTurma = data['turma']
+    user = aluno.createAluno(nome, idTurma, senhaAluno)
     print()
     return 'sucesso'
 
-@app.route('/alunos')
+@app.route('/aluno')
 def getAllAlunos():
     als = aluno.getAllAlunos()
     return als
