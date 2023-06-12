@@ -3,7 +3,7 @@
     <div style="display:flex; justify-content:space-between">
       <div class="title">{{ $store.state.user.name }}</div>
       <div>
-        <button @click="$router.push('/nota/nova')" class="btn primary">Nova nota</button>
+        <button v-if="$store.state.user.role === 'professor'" @click="$router.push('/nota/nova')" class="btn primary">Nova nota</button>
       </div>
     </div>
     <div class="card">

@@ -80,7 +80,7 @@ export default {
         this.p2,
         this.rec
       )
-      this.$router.push('/materia')
+      this.$router.push('/nota')
     }
   }
 }
