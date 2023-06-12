@@ -42,6 +42,15 @@ def login():
     senha = data['senha']
     return signin.login(nome,senha)
 
+@app.route('/professor',methods = ['POST'])
+def createProf():
+    data = request.json
+    nome = data['nome']
+    senhaProfessor = data['senha']
+    user = professor.createProf(nome, senhaProfessor)
+    print()
+    return 'sucesso'
+
 @app.route('/professor')
 def getAllProf():
     profs = professor.getAllProf()
