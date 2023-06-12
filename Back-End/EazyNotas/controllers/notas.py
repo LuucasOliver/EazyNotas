@@ -5,7 +5,7 @@ import sql
 
 def createNota(rA, idMateria, notaP1, notaP2, notaRc):
     cursor = sql.conectabanco()
-    sqlQuery = 'INSERT INTO NOTA (rA, idMateria, notaP1, notaP2, notaRc) VALUES(?, ?, ?)'
+    sqlQuery = 'INSERT INTO NOTA (rA, idMateria, notaP1, notaP2, notaRc) VALUES(?, ?, ?, ?, ?)'
     params = rA, idMateria, notaP1, notaP2, notaRc
     print(rA, idMateria, notaP1, notaP2, notaRc)
     cursor.execute(sqlQuery, params)

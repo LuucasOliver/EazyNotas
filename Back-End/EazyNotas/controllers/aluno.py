@@ -6,24 +6,23 @@ import sql
 def createAluno(nome, idTurma, senhaAluno):
     cursor = sql.conectabanco()
     sqlQuery = 'INSERT INTO ALUNO (nome, idTurma, senhaAluno) VALUES(?, ?, ?)'
-    params = nome, idTurma, senhaAluno 
-    print(nome, idTurma, senhaAluno)
+    params = [nome, idTurma, senhaAluno]
+    print(sqlQuery)
+    print(params)
     cursor.execute(sqlQuery, params)
     cursor.commit()
     cursor.close()
     return 
 
 def getAllAlunos():
-
     cursor = sql.conectabanco()
-    cursor.execute("SELECT rA, nome, idTipo, idTurma, senhaAluno CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1")
+    cursor.execute("SELECT rA, nome, idTurma, senhaAluno, CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1")
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
     json_string = json.dumps(result)
     return json_string
 
 def getAluno(rA):
-
     cursor = sql.conectabanco()
     sqlQuery = "SELECT rA, nome, idTipo, idTurma, senhaAluno CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM ALUNO WHERE bitAtivo = 1 AND rA = ?"
     cursor.execute(sqlQuery, rA)

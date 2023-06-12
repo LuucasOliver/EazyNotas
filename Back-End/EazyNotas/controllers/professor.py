@@ -22,7 +22,6 @@ def getAllProf():
     return json_string
 
 def getProf(idProfessor):
-
     cursor = sql.conectabanco()
     sqlQuery = "SELECT nome, idTipo, senhaProfessor, CONVERT(VARCHAR, dataInserido, 101) dataInserido FROM PROFESSOR"
     cursor.execute(sqlQuery, idProfessor)

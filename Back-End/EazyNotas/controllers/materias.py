@@ -3,9 +3,9 @@ import sys
 sys.path.insert(0, './')
 import sql
 
-def createMaterias(nomeMat, idProfessor, diaMateriam, horarioAula):
+def createMaterias(nomeMat, idProfessor, diaMateria, horarioAula):
     cursor = sql.conectabanco()
-    sqlQuery = 'INSERT INTO MATERIAS(nomeMat, idProfessor, diaMateria, horarioAula) VALUES(?, ?)'
+    sqlQuery = 'INSERT INTO MATERIAS(nomeMat, idProfessor, diaMateria, horarioAula) VALUES(?, ?, ?, ?)'
     params = nomeMat, idProfessor, diaMateria, horarioAula
     print(nomeMat, idProfessor, diaMateria, horarioAula)
     cursor.execute(sqlQuery, params)
@@ -14,9 +14,8 @@ def createMaterias(nomeMat, idProfessor, diaMateriam, horarioAula):
     return 
 
 def getAllMaterias():
-
     cursor = sql.conectabanco()
-    cursor.execute("SELECT nomeMat, idProfessor, diaMateria, horarioAula FROM MATERIAS")
+    cursor.execute("SELECT idMateria, nomeMat, idProfessor, diaMateria, horarioAula FROM MATERIAS")
     rows = cursor.fetchall()
     result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
     json_string = json.dumps(result)
