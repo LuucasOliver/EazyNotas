@@ -11,15 +11,15 @@
       <table>
         <thead>
           <th>Disciplinas</th>
-          <th>Aluno</th>
+          <th v-if="$store.state.user.role === 'professor'">Aluno</th>
           <th>p1</th>
           <th>p2</th>
           <th>Rec</th>
         </thead>
         <tbody>
           <tr v-for="(nota, index) in notas" :key="index">
-            <td>{{ nota.nome }}</td>
-            <td>{{ nota.nome }}</td>
+            <td>{{ materias.find(materia => materia.idMateria === nota.idMateria).nomeMat }}</td>
+            <td v-if="$store.state.user.role === 'professor'">{{ alunos.find(aluno => aluno.rA === nota.rA).nome }}</td>
             <td>{{ nota.notaP1 }}</td>
             <td>{{ nota.notaP2 }}</td>
             <td>{{ nota.notaRc }}</td>
@@ -50,6 +50,11 @@ export default {
       getAllMaterias(),
       getAllAlunos()
     ])
+
+    this.notas = this.notas.filter(nota => {
+      if (nota.ra === this.$store.state.usuario.ra) return true
+      return false
+    })
   },
   methods: {}
 }

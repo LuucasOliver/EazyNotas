@@ -27,7 +27,6 @@
         </div>
         <div class="item"
           @click="$router.push('/nota')"
-          v-if="$store.state.user.role === 'professor'"
         >
           <div class="icon">
             <img src="@images/turmas.png" alt="">

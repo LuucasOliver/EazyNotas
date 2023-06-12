@@ -13,7 +13,6 @@
             >
               {{ selectedTurma.sala }}
             </option>
-            <option value="aluno">Aluno</option>
           </select>
         </div>
         <div class="input input-text">
